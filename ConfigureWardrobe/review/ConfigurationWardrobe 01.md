@@ -117,7 +117,7 @@ nicht perfekt aussieht, aber dann kann ich diese Lösung immer noch refactorn.
 Ich muss anfangen mich an die Lösung heranzutasten, anstatt direkt mit der 
 Komplettlösung zu starten. Also nochmals von vorne. Ich sollte mit kleineren 
 Tests anfangen, um mich der Lösung zu näheren. Also starten wir mit der 
-Funktion, welche für eine gewählte Option entscheidet ob basierend auf den 
+Funktion, welche für eine gewählte Option entscheidet, ob basierend auf den 
 möglichen Optionen und der Zielbreite eine Lösung zurückgibt oder nicht. Am 
 einfachsten startet man mit dem Fall, dass die gewählte Option genau die 
 Lösung erfüllt: 

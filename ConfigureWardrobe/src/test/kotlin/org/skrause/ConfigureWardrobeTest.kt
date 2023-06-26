@@ -42,6 +42,27 @@ class ConfigureWardrobeTest {
         assert(solutions.isEmpty())
     }
 
-    // Test for calculating a solution when two wardrobes are needed
+    @Test
+    fun `calculate solution for a length that needs two wardrobes`(){
+        val option = Wardrobe(50.cm)
+        val options = setOf(Wardrobe(50.cm), Wardrobe(75.cm))
+        val desiredLength = 100
+        val solutions = getSolutionForOption(option, options, desiredLength.cm)
+
+        assert(solutions.size == 1)
+        assert(solutions[0].wardrobes.size == 2)
+        assert(solutions[0].wardrobes[0] == option)
+        assert(solutions[0].wardrobes[1] == option)
+    }
+
+    @Test
+    fun `calculate empty solution if no solution is possible`(){
+        val option = Wardrobe(50.cm)
+        val options = setOf(Wardrobe(50.cm), Wardrobe(75.cm))
+        val desiredLength = 110
+        val solutions = getSolutionForOption(option, options, desiredLength.cm)
+
+        assert(solutions.isEmpty())
+    }
     // Test for calculating a solution when length cannot be solved
 }

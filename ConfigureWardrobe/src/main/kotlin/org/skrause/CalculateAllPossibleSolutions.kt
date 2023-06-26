@@ -11,7 +11,11 @@ fun getSolutionForOption(
     return when  {
         remainingLength == 0.cm -> listOf(Solution(listOf(currentOption)))
         remainingLength < 0.cm -> emptyList()
-        else -> TODO("Not yet implemented")
+        remainingLength > 0.cm -> {
+            calculateAllPossibleSolutions(options, remainingLength)
+                .map { solution -> solution.copy(wardrobes = listOf(currentOption) + solution.wardrobes) }
+        }
+        else -> TODO("Not yet implemented, but should not happen")
     }
 }
 
