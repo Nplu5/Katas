@@ -8,14 +8,14 @@ fun getSolutionForOption(
     desiredLength: Centimeter
 ): List<Solution> {
     val remainingLength = desiredLength - currentOption.width
-    return when  {
+    return when {
         remainingLength == 0.cm -> listOf(Solution(listOf(currentOption)))
         remainingLength < 0.cm -> emptyList()
         remainingLength > 0.cm -> {
             calculateAllPossibleSolutions(options, remainingLength)
                 .map { solution -> solution.copy(wardrobes = listOf(currentOption) + solution.wardrobes) }
         }
-        else -> TODO("Not yet implemented, but should not happen")
+        else -> error {"remainingLength should never be reaching the else branch"}
     }
 }
 
