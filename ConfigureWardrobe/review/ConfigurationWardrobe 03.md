@@ -59,6 +59,52 @@ Preiskatalog aufzubauen würde ich gerne eine kleine DSL schreiben, die es
 einfacher macht einen Preiskatalog zu erstellen. Das werde ich wohl morgen 
 machen müssen, da ich heute bei der Bearbeitung zu sehr abgelenkt war.
 
+## Ergänzung
+
+Jetzt hat mich die Lust auf eine kleine DSL doch gepackt und ich habe sie 
+implementiert. Mit dem Test
+
+```kotlin
+@Test
+fun `Price Catalog builder creates a price catalog`(){
+    val wardrobe = Wardrobe(50.cm)
+    val expectedPrice = 100.0
+    val priceCatalog = priceCatalog {
+        wardrobe costs expectedPrice
+    }
+
+    assert(priceCatalog.price(wardrobe) == expectedPrice)
+}
+```
+
+Ergab sich folgende Implementierung
+
+```kotlin
+class PriceCatalog(private val wardrobePrices: Map<Centimeter, Double>) {
+
+    fun price(wardrobe: Wardrobe): Double {
+        return wardrobePrices[wardrobe.width] ?: error("No price found for wardrobe with width ${wardrobe.width}")
+    }
+    class PriceCatalogBuilder {
+        private val wardrobePrices = mutableMapOf<Centimeter, Double>()
+        infix fun Wardrobe.costs(price: Double) {
+            wardrobePrices[width] = price
+        }
+
+        fun build(): PriceCatalog {
+            return PriceCatalog(wardrobePrices)
+        }
+    }
+    companion object {
+        fun priceCatalog(block: PriceCatalogBuilder.() -> Unit): PriceCatalog {
+            return PriceCatalogBuilder()
+                .apply(block)
+                .build()
+        }
+    }
+}
+```
+
 ## Weitere Ideen
 
 Voreilige Optimierungen:
