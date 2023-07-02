@@ -105,6 +105,9 @@ class PriceCatalog(private val wardrobePrices: Map<Centimeter, Double>) {
 }
 ```
 
+Jetzt reicht es mir aber für heute. Morgen geht es weiter mit eventuellen 
+Verbesserungen für die DSL, sowie der Berechnung der Kosten für eine Lösung.
+
 ## Weitere Ideen
 
 Voreilige Optimierungen:

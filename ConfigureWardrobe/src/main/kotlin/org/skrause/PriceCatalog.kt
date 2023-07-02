@@ -11,6 +11,10 @@ class PriceCatalog(private val wardrobePrices: Map<Centimeter, Double>) {
             wardrobePrices[width] = price
         }
 
+        infix fun Centimeter.costs(price: Double) {
+            wardrobePrices[this] = price
+        }
+
         fun build(): PriceCatalog {
             return PriceCatalog(wardrobePrices)
         }

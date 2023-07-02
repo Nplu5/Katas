@@ -16,4 +16,15 @@ class PriceCatalogTest {
 
         assert(priceCatalog.price(wardrobe) == expectedPrice)
     }
+
+    @Test
+    fun `Price catalog allows to add wardrobe only by width`(){
+        val wardrobe = Wardrobe(50.cm)
+        val expectedPrice = 125.0
+        val priceCatalog = priceCatalog {
+            50.cm costs expectedPrice
+        }
+
+        assert(priceCatalog.price(wardrobe) == expectedPrice)
+    }
 }
