@@ -2,6 +2,7 @@ package org.skrause
 
 import org.junit.jupiter.api.Test
 import org.skrause.Centimeter.Companion.cm
+import org.skrause.PriceCatalog.Companion.priceCatalog
 
 class ConfigureWardrobeTest {
 
@@ -64,5 +65,31 @@ class ConfigureWardrobeTest {
 
         assert(solutions.isEmpty())
     }
-    // Test for calculating a solution when length cannot be solved
+
+    @Test
+    fun `Kata solution`(){
+        val options = setOf(
+            Wardrobe(50.cm),
+            Wardrobe(75.cm),
+            Wardrobe(100.cm),
+            Wardrobe(120.cm),
+        )
+        val priceCatalog = priceCatalog {
+            Wardrobe(50.cm) costs 59.0
+            Wardrobe(75.cm) costs 62.0
+            Wardrobe(100.cm) costs 90.0
+            Wardrobe(120.cm) costs 111.0
+        }
+        val desiredLength = 250.cm
+        val solutions = calculateAllPossibleSolutions(options, desiredLength)
+        val cheapestSolution = solutions.map { it to it.cost(priceCatalog) }
+            .minBy { it.second }
+        println("All possible solutions")
+        solutions.forEach { println(it) }
+        println("----------------------")
+        println("Cheapest solution")
+        println(cheapestSolution.first)
+        println("For: ${cheapestSolution.second}€")
+    }
+
 }
